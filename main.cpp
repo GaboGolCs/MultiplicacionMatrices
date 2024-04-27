@@ -12,41 +12,82 @@ Code, Compile, Run and Debug online from anywhere in world.
 using namespace std;
 
 
-void ingreso(int c1, int f1);
-void llenado(int fila,int columna, int M[f1][c1]);
+
+int Inicializador(int **&, int&, int&);
+int Llenado(int **&, int, int);
 
 
 int main()
 {
+    int **puntero_Matriz,fila,columna;  // creamos el puntero doble que apunta a el inicio de la MATRIZ ademas de el numero de filas y columnas
     
-    int c1,f1,c2,f2;
     
-    ingreso(&f1,&c1);  // tamaño de la matriz
-    ingreso(&f2,&c2);
-    
-    int Matriz1 [f1][c1], Matriz2 [][];
+    Inicializador(puntero_Matriz, fila, columna);
+    Llenado(puntero_Matriz,fila,columna);
     
     return 0;
 }
 
 
-void ingreso(int f1, int c1){
+int Inicializador(int **&puntero_Matriz, int &fila, int &columna){              //Le enviamos todo por referencia para poder ser modificados en ejecucion y haer la funcion modular
+                                                                                            
     
-    cout<<"Ingrese tamaño de la fila de la MATRIZ: "<<endl;
-    cin>>f1;
+
+    cout<<"Ingrese tamaño de la fila de la MATRIZ: "<<endl;         //pedimos fila
+    cin>>fila;
     
-    cout<<"Ingrese tamaño de la columna de la MATRIZ: "<<endl;
-    cin>>c1;   
+    cout<<"Ingrese tamaño de la columna de la MATRIZ: "<<endl;      //Pedimos columna
+    cin>>columna;   
+    
+    
+    puntero_Matriz = new int* [fila];               //Asignamos memoria a las filas 
+    
+    for (int i =0; i<fila; i++){
+        
+        puntero_Matriz[i] = new int [columna];      //Asignamos memoria a las columnas 
+        
+    }
+    
+    
+
+    return 0;
     
 }
 
-void llenado(int fila, int columna, int M[][]){
-    for(int i = 0; i < fila; i++){
-        for(int j = 0; j < columna; j++){
-            cout << "Ingrese posicion [" << i << "][" << j << "]";
+// debemos entender que el doble puntero sinifica que es un puntero apuntando a otro puntero, en este caso se usa para apuntar a el array de punteros que representan las filas  
+// cada  celda en el array fila contiene el puntero a un array donde se contiene todos los valores de las comlumna
+
+
+/*
+Le pedi al chat gpt que hiciera una representacion grafica de el asunto
+
+
++-----------------+      +------------+------------+ ... +------------+
+|   Puntero a     | ---> |    Fila    |    Fila    |     |    Fila    |
+|   la primera    |      +------------+------------+ ... +------------+
+|    fila (ptr)   |      | Elemento 0 | Elemento 1 |     | Elemento n |
++-----------------+      +------------+------------+ ... +------------+
+                           | Elemento 0 | Elemento 1 |     | Elemento n |
+                           +------------+------------+ ... +------------+
+                           |     ...    |     ...    |     |     ...    |
+                           +------------+------------+ ... +------------+
+
+
+
+*/
+
+int Llenado(int **&puntero_Matriz, int f, int c){   //solo pasamos por referencia la MATRIZ ya que es lo unico que necesitamos cambiar en este caso
+    
+    for(int i = 0; i < f; i++){
+        
+        for(int j = 0; j < c; j++){
+            
+            cout << "Ingrese posición [" << i+1 << "][" << j+1 << "]: ";
+            cin >> *(*(puntero_Matriz+i)+j);        // Equivalente a MATRIZ[i][j]
+            
         }
     }
+    return 0;
 }
-
 
 
