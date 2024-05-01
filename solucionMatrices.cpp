@@ -6,12 +6,16 @@ using namespace std;
 void multiplication(long **matriz, int columnas, int filas, long **matrizResultado){
     for(int i = 0; i < filas; i++){
         for(int j = 0; j < columnas; j++){
+            // Vacia la posicion de la matriz resultado para asignarle el valor de la multiplicacion
             matrizResultado[i][j] = 0;
+            // Este hace el calculo, se multiplica cada fila por la columna y se va sumando por la cantidad que haya de columnas, podría haber
+            // sido fila pero realmente no importa ya que deben ser iguales.
             for(int n = 0; n < columnas; n++){
                 matrizResultado[i][j] += matriz[i][n]*matriz[n][j];
             }
         }
     }
+    // Reemplaza los valores de la matriz por la del resultado
     for(int i = 0; i < filas; i++){
         for(int j = 0; j < columnas; j++)
             matriz[i][j] = matrizResultado[i][j];
@@ -20,6 +24,8 @@ void multiplication(long **matriz, int columnas, int filas, long **matrizResulta
 
 int main(){
     int filas, columnas;
+    // Ingreso de datos de la matriz, las filas y columnas deben ser iguales ya que si se multiplica la cantidad de filas
+    // debe ser la misma que la cantidad de columnas de la matriz por la que se multiplica
     do{
         cout << "Ingrese n° de filas: ";
         cin >> filas;
@@ -71,6 +77,7 @@ int main(){
     } while(x == 1);
     cout << "\n\n";
 
+    // Libera la memoria asignada a la matriz.
     for(int i = 0; i < columnas; i++){
         free(matrizResultado[i]);
     }
