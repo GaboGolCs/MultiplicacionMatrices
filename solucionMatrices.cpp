@@ -3,7 +3,7 @@
 
 using namespace std;
 
-void multiplication(int **matriz, int columnas, int filas, int **matrizResultado){
+void multiplication(long **matriz, int columnas, int filas, long **matrizResultado){
     for(int i = 0; i < filas; i++){
         for(int j = 0; j < columnas; j++){
             matrizResultado[i][j] = 0;
@@ -30,17 +30,17 @@ int main(){
     }while(filas < 0 || columnas < 0 || filas != columnas);
 
     // Asigna el espacio para las filas de la matriz
-    int **matriz = (int**)malloc(filas * sizeof(int*));
+    long **matriz = (long**)malloc(filas * sizeof(long*));
     // Asigna el espacio para las columnas de la matriz
     for(int i = 0; i < columnas; i++){
-        matriz[i] = (int*)malloc(columnas * sizeof(int));
+        matriz[i] = (long*)malloc(columnas * sizeof(long));
     }
 
     // Asigna el espacio para las filas de la matriz resultado
-    int **matrizResultado = (int**)malloc(filas * sizeof(int*));
+    long **matrizResultado = (long**)malloc(filas * sizeof(long*));
     // Asigna el espacio para las columnas de la matriz resultado
     for(int i = 0; i < columnas; i++){
-        matrizResultado[i] = (int*)malloc(columnas * sizeof(int));
+        matrizResultado[i] = (long*)malloc(columnas * sizeof(long));
     }
 
     // Asigna valores al inicio de la matriz
@@ -58,6 +58,7 @@ int main(){
         cout << "Para iterar, ingrese 1.\n";
         cout << "Para terminar, ingrese 0.\n";
         cin >> x;
+        cout << "\n";
         } while(x != 0 && x != 1);
         multiplication(matriz, columnas, filas, matrizResultado);
         // Muestra los valores del resultado
